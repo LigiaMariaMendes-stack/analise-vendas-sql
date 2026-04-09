@@ -25,3 +25,13 @@ WHERE valor_gasto > 1000;
 SELECT nome, cidade, valor_gasto FROM clientes
 where cidade = 'são paulo' 
 order by valor_gasto desc;
+
+SELECT nome , valor_gasto from clientes 
+order by nome; 
+
+select nome, valor_gasto from clientes 
+where valor_gasto between 800.00 and 2500.00
+
+select nome, valor_gasto from clientes
+where nome like 'F%' or nome like 'J%'
+order by valor_gasto desc
