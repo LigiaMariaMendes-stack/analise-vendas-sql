@@ -42,3 +42,38 @@ SELECT nome, valor_gasto,
     END AS performance
 FROM clientes
 ORDER BY valor_gasto DESC;
+
+DROP TABLE IF EXISTS pedidos;
+DROP TABLE IF EXISTS clientes;
+
+CREATE TABLE clientes (
+    id          INT,
+    nome        VARCHAR(50),
+    cidade      VARCHAR(50),
+    valor_gasto DECIMAL(10,2)
+);
+
+INSERT INTO clientes VALUES
+(1, 'Ana Silva',     'São Paulo',      1500.00),
+(2, 'Carlos Lima',   'Brasília',        800.00),
+(3, 'Fernanda Dias', 'Rio de Janeiro', 2200.00),
+(4, 'Roberto Souza', 'São Paulo',       450.00),
+(5, 'Julia Mendes',  'Brasília',       3100.00);
+
+-- CTE + CASE WHEN combinados
+WITH media_gasto AS (
+    SELECT AVG(valor_gasto) AS media
+    FROM clientes
+)
+SELECT 
+    c.nome,
+    c.valor_gasto,
+    m.media AS media_geral,
+    CASE
+        WHEN c.valor_gasto > m.media THEN 'Acima da média'
+        ELSE 'Abaixo da média'
+    END AS performance
+FROM clientes c, media_gasto m
+ORDER BY c.valor_gasto DESC;
+
+
